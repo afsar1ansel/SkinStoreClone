@@ -1,8 +1,6 @@
-
 const express = require("express");
 const product = require("../models/product");
 const productRouter = express.Router();
-
 
 productRouter.get("/", async (req, res) => {
   try {
@@ -15,12 +13,19 @@ productRouter.get("/", async (req, res) => {
   }
 });
 
-productRouter.get("/search/:name", async (req, res) => {
+productRouter.get("/search/:name/:sort?", async (req, res) => {
   try {
-    const { name } = req.params;
-    const regex = new RegExp(name, "i"); 
+    const { name, sort } = req.params;
+    const regex = new RegExp(name, "i");
 
-    const searchData = await product.find({ name: regex });
+    let sortOptions = {};
+    if (sort === "asc") {
+      sortOptions = { price: 1 };
+    } else if (sort === "desc") {
+      sortOptions = { price: -1 };
+    }
+
+    const searchData = await product.find({ name: regex }).sort(sortOptions);
     console.log(searchData);
 
     res.send({ data: searchData });
@@ -30,5 +35,5 @@ productRouter.get("/search/:name", async (req, res) => {
   }
 });
 
-module.exports = productRouter;
 
+module.exports = productRouter;
