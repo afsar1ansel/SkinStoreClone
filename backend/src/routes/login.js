@@ -35,10 +35,14 @@ loginRouter.post("/login", async (req, res) => {
           res.cookie("authToken", authToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 60,
+            sameSite: "none",
+            secure: true,
           })
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24,
+            sameSite: "none",
+            secure: true,
           })
 
           res.send({mgs:"Login Successful",authToken:authToken,refreshToken:refreshToken});
