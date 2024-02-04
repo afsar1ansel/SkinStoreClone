@@ -3,7 +3,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import TopNav from "./TopNav";
 import Search from "./Search";
 import Acount from "./Acount";
-import Cart from "./cart";
+import Cart from "./Cart";
 import Brands from "./contain/Brands";
 import Holiday from "./contain/Holiday";
 import Sale from "./contain/Sale";
@@ -19,7 +19,7 @@ import Build from "./contain/Build";
 import Blog from "./contain/Blog";
 import Navmenu from "./Navmenu";
 import Popsearch from "./Popsearch";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
