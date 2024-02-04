@@ -11,7 +11,7 @@ function Search() {
    console.log(SearchInp)
   }
   return (
-    <InputGroup w="40%"  h="40px" size="sm">
+    <InputGroup w="100%"  h="40px" size="sm">
       <Input
         onClick={(e) => {
           if (e.code === "Enter") {

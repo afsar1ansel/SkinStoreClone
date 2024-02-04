@@ -73,7 +73,9 @@ function Navbar() {
             part of the LOOKFANTASTIC group
           </Text>
         </Flex>
+        <Box w={"40%"} display={{ lg: "flex", md: "none", sm: "none", base: "none" }} >
         <Search />
+        </Box>
         <Flex w={"20%"} justifyContent={"space-evenly"} display={{ lg: "flex", md: "none", sm: "none", base: "none" }} >
           <Acount />
           <Cart />
