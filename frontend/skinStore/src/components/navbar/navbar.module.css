@@ -1,0 +1,12 @@
+.greyHover:hover{
+     background-color: #f5f3f3;
+     cursor: pointer;
+}
+.blackHover:hover{
+     background-color: rgb(40, 39, 39);
+     color: white;
+     transition: 0.5s;
+}
+.shadowHover:hover{
+     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
