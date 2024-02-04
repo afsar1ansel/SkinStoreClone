@@ -85,10 +85,10 @@ function Brands() {
           Brands
         </Box>
       </PopoverTrigger>
-      <PopoverContent w="100vw">
+      <PopoverContent w="90vw">
         <PopoverArrow />
         <PopoverHeader>
-          <Box h="0.5px" bg="black" w="95%" m="auto"></Box>
+          <Box h="0.5px" bg="black" w="100%" m="auto"></Box>
           <Flex mx="50px" alignItems="center" justifyContent="space-between">
             <Flex gap="1px">
               {brandkeys.map((e) => (
@@ -105,7 +105,7 @@ function Brands() {
             </Flex>
             <Box>View All Brands</Box>
           </Flex>
-          <Box h="1px" bg="black" w="95%" m="auto"></Box>
+          <Box h="1px" bg="black" w="100%" m="auto"></Box>
         </PopoverHeader>
         <PopoverBody>
           <SimpleGrid mx="50px" columns={5}>

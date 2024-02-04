@@ -15,8 +15,10 @@ import {
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
+import axios from "axios";
 
 // import jwt from "jsonwebtoken";
+//https://real-red-hen-hem.cyclic.app
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,16 +27,26 @@ export default function Register() {
   const { user, setUser } = useContext(UserContext);
 
   // console.log(user)
-
+  //https://real-red-hen-hem.cyclic.app
   //   const redirectPath = location.state?.path || "/";
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(email, password);
-    user.email = email;
-    user.password = password;
-    user.name = username;
-    console.log(user);
+
+    const user = { email, password, name: username };
+    console.log(user)
+    try {
+      const response = await axios.post(
+        "https://real-red-hen-hem.cyclic.app/user/register",
+        user,
+        { withCredentials: true }
+      );
+      console.log(response.data);
+      // Optionally update user context or perform other actions upon successful registration
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // Provide user-friendly feedback or handle errors as needed
+    }
   };
 
   return (
@@ -54,7 +66,10 @@ export default function Register() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>User Name</FormLabel>
-              <Input type="email" onChange={(e) => setUsername(e.target.value)} />
+              <Input
+                type="email"
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </FormControl>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
@@ -72,8 +87,7 @@ export default function Register() {
                 direction={{ base: "column", sm: "row" }}
                 align={"start"}
                 justify={"space-between"}
-              >
-              </Stack>
+              ></Stack>
               <Button
                 onClick={handleLogin}
                 fontWeight="600"

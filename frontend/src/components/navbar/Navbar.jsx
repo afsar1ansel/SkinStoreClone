@@ -51,7 +51,7 @@ function Navbar() {
         display={"flex"}
         justifyContent={"space-evenly"}
         alignItems={"center"}
-        borderBottom={"3px solid black"}
+        borderBottom={"2px solid black"}
       >
         <Flex
           cursor={"pointer"}
@@ -87,6 +87,8 @@ function Navbar() {
         bg="white"
         boxShadow={` rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`}
         justifyContent="center"
+        color={"#333"}
+        fontSize={"15px"}
       >
         <Brands />
         <Holiday />
