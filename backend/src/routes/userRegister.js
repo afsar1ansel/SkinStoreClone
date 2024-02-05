@@ -3,6 +3,7 @@ const registerRouter = express.Router();
 const User = require("../models/userModle");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const otpGenerator = require("otp-generator");
 require("dotenv").config();
 
 let userDetail = {};
@@ -11,12 +12,14 @@ let otp = "";
 registerRouter.post("/register", async (req, res) => {
   const { email, password, name } = req.body;
   const isuser = await User.findOne({ email });
-  if(isuser){
-    res.send("User already exists")
+  if (isuser) {
+    res.send("User already exists");
+    return;
   }
-  
+
   userDetail = { email, password, name };
-  otp = Math.floor(1000 + Math.random() * 9000);
+  otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
+  console.log(otp);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -27,8 +30,8 @@ registerRouter.post("/register", async (req, res) => {
   });
 
   const mailOptions = {
-    from: "mdafsaransal@gmail",
-    to: userDetail.email, 
+    from: process.env.MY_MAIL,
+    to: userDetail.email,
     subject: "Email verification",
     text: `Your otp is ${otp}`,
   };
@@ -43,12 +46,16 @@ registerRouter.post("/register", async (req, res) => {
 
 registerRouter.post("/verify", async (req, res) => {
   const { userOtp } = req.body;
-
-  if (userOtp == otp) {
+  console.log(userOtp, otp);
+  if (userOtp === otp) {
     try {
       bcrypt.hash(userDetail.password, 5, async (err, hash) => {
         if (err) {
-          res.send("Something went wrong with hashing" + err);
+          res.send({
+            error: true,
+            msg: "Something went wrong with hashing",
+            err,
+          });
         } else {
           const user = new User({
             name: userDetail.name,
@@ -56,14 +63,14 @@ registerRouter.post("/verify", async (req, res) => {
             password: hash,
           });
           await user.save();
-          res.send("User registered successfully");
+          res.send({ error: false, message: "User registered successfully" });
         }
       });
     } catch (error) {
       res.send({ msg: error.message });
     }
   } else {
-    res.send("Otp verification failed");
+    res.status(400).send({ error: true, message: "Otp verification failed" });
   }
 });
 

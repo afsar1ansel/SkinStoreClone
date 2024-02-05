@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const product = require('./src/models/product')
 const cors = require('cors')
 
-app.use(cors({ origin: ["http://localhost:5173"], credentials: true,   }));
+app.use(cors({ origin: ["http://localhost:5173","*"], credentials: true,   }));
 
 app.use(express.json())
 app.use(cookieParser())
