@@ -45,7 +45,7 @@ loginRouter.post("/login", async (req, res) => {
             secure: true,
           })
 
-          res.send({mgs:"Login Successful",authToken:authToken,refreshToken:refreshToken});
+          res.send({mgs:"Login Successful", userDetail:user, authToken:authToken,refreshToken:refreshToken});
 
         } else {
           res.status(400).send("Wrong password");
