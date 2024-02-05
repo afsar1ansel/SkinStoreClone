@@ -15,13 +15,21 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavStyle from "../navbar.module.css";
+import { UserContext } from "../../../Contexts/UserContext";
+
+
+
+
 
 function Brands() {
+
   const [brandnames, setBrandnames] = useState([
     "almay",
     "anna sui",
     "annabelle",
   ]);
+  const { user, setUser, search, setSearch } = useContext(UserContext);
+
   const [brandkeys, setBrandkeys] = useState([]);
   const navigate = useNavigate();
   console.log(brandnames);

@@ -8,7 +8,7 @@ const Middle = () => {
       spacing={10}
       w="90%"
       m={8}
-      mt="5rem"
+      mt="12rem"
       pl="10%"
       pr="2.5%"
     >

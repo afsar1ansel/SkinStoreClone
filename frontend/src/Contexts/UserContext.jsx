@@ -9,10 +9,12 @@ export  function UserProvider({ children }) {
         password: "",
         email: "",
     })
+
+    const [search, setSearch] = useState("")
     
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, search, setSearch }}>
             {children}
         </UserContext.Provider>
     )

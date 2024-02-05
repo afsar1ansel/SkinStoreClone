@@ -1,34 +1,43 @@
-
 import { Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Contexts/UserContext";
+
 function Search() {
-  const [SearchInp, setSearchInp] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-  function toggleSearch(e) {
-   console.log(SearchInp)
-  }
+  const { search, setSearch } = useContext(UserContext);
+
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearch(searchInput);
+    console.log(searchInput);
+    navigate(`/productpage?q=${searchInput}`);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.code === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <InputGroup w="100%"  h="40px" size="sm">
+    <InputGroup w="100%" h="40px" size="sm">
       <Input
-        onClick={(e) => {
-          if (e.code === "Enter") {
-            toggleSearch();
-          }
-        }}
-        onChange={(e) => {
-          setSearchInp(e.target.value);
-          // console.log(e)
-        }}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+        value={searchInput}
         h="100%"
         placeholder="Search for product or brand..."
       />
       <InputRightAddon
         h="100%"
         bg="white"
-        onClick={toggleSearch}
+        onClick={handleSearch}
         children={<BiSearch />}
       />
     </InputGroup>
@@ -36,4 +45,3 @@ function Search() {
 }
 
 export default Search;
-
