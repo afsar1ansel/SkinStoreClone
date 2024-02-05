@@ -24,6 +24,7 @@ import axios from "axios";
 import { UserContext } from "../Contexts/UserContext";
 // import { SearchContext } from "../Utilis/Context/SearchContext";
 // "https://makeup-api.herokuapp.com/api/v1/products.json"
+//https://skin-care-hub.onrender.com/product?l=all&q=
 const ProductPage = () => {
 //   const { search, togglesearch } = useContext(SearchContext);
   const { user, setUser, search, setSearch } = useContext(UserContext);
@@ -37,28 +38,12 @@ const ProductPage = () => {
       setLoad(true);
 
       const res = await axios.get(
-        `https://skin-care-hub.onrender.com/product?l=all&q=${search}`
+        `https://real-red-hen-hem.cyclic.app/product/search/${search}`
       );
-      console.log(res.data);
-      setPosts(res.data);
+      console.log(res.data.data);
+      setPosts(res.data.data);
 
-    //   const res = await axios.get(
-    //     `https://skin-care-hub.onrender.com/product?l=all${
-    //       sortBy ? "price=" + sortBy : ""
-    //     }${search.brand ? "&brand=" + search.brand : ""}${
-    //       search.type ? "&type=" + search.type : ""
-    //     }${search.q ? "&q=" + search.q : ""}`
-    //   );
-    //   console.log(search);
-    //   console.log(
-    //     `https://skin-care-hub.onrender.com/product?l=all${
-    //       sortBy ? "price=" + sortBy : ""
-    //     }${search.brand ? "&brand=" + search.brand : ""}${
-    //       search.type ? "&type=" + search.type : ""
-    //     }${search.q ? "&q=" + search.q : ""}`
-    //   );
-    //   console.log(res.data);
-    //   setPosts(res.data);
+    
       setLoad(false);
     };
     fetchPosts();
