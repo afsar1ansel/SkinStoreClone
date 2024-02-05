@@ -36,8 +36,11 @@ const ProductPage = () => {
       // console.log(query)'
       setLoad(true);
 
-      const res = await axios.get(`https://real-red-hen-hem.cyclic.app/product/search/${search}`);
+      const res = await axios.get(
+        `https://skin-care-hub.onrender.com/product?l=all&q=${search}`
+      );
       console.log(res.data);
+      setPosts(res.data);
 
     //   const res = await axios.get(
     //     `https://skin-care-hub.onrender.com/product?l=all${
@@ -76,22 +79,7 @@ const ProductPage = () => {
   }
   return (
     <>
-      {/* <Box
-        w="95%"
-        margin="auto"
-        p={4}
-        bg="blackAlpha.800"
-        color="white"
-        _hover={{ bg: "white", color: "black" }}
-        marginTop="150px"
-        marginBottom="2"
-      >
-        <Text fontSize="lg" fontWeight="600">
-          {" "}
-          25% off with code REPLAY + free Holiday Beauty Bag (worth $170) @
-          $150+ | SHOP NOW &gt;
-        </Text>
-      </Box> */}
+    
       <Box  w="95%" m={5} justifyContent="space-evenly">
         <Box>
           <Heading>The Holiday Countdown is On!</Heading>
@@ -257,6 +245,7 @@ const ProductPage = () => {
         bgColor="black"
         color="white"
         borderRadius="0"
+        border={"2px solid black"}
         _hover={{
           bg: "cyan.500",
         }}

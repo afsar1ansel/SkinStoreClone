@@ -52,6 +52,7 @@ function Navbar() {
         justifyContent={"space-evenly"}
         alignItems={"center"}
         borderBottom={"2px solid black"}
+        pb={"20px"}
       >
         <Flex
           cursor={"pointer"}
