@@ -13,20 +13,22 @@ import {
 } from "@chakra-ui/react";
 import { RxPerson } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+// import Admin from "../../Pages/Admin";
+// import { useAuth } from "../../Utilis/Auth";
 import NavStyle from "./navbar.module.css";
-import { useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
-import UserAccount from "./UserAccount";
-function Acount() {
+import { useContext } from "react";
+
+
+
+
+
+function UserAccount() {
+
   const navigate = useNavigate();
-
   const { user, setUser } = useContext(UserContext);
-  console.log(user, "acount")
-
-
-  if(user.status){
-    return ( <UserAccount />)
-  }
+//   const { logout } = useAuth();
+ console.log(user)
 
 
   return (
@@ -37,7 +39,8 @@ function Acount() {
           <Text
             display={{ lg: "initial", md: "none", sm: "none", base: "none" }}
           >
-            Account
+            {user.name}
+            {/* {user} */}
           </Text>
         </Flex>
       </PopoverTrigger>
@@ -45,34 +48,31 @@ function Acount() {
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader pt="40px" bg="#f9f9f9">
-          <Flex flexDir="column" rowGap="20px">
+          {/* {role === "Admin" ? (
             <Button
-              onClick={() => navigate("/login")}
-              colorScheme="blackAlpha"
-              variant="solid"
+              w="100%"
+              onClick={() => {
+                navigate("/admin");
+              }}
             >
-              Login
+              Admin
             </Button>
+          ) : (
+            `Logged in As ${role}`
+          )} */}
+        </PopoverHeader>
+        <PopoverBody p="20px">
+          <Flex flexDir="column">
+            <Text fontWeight="semibold">Name: {user.name}</Text>
+            <Text fontWeight="semibold">Email: {user.email}</Text>
             <Button
-              onClick={() => navigate("/register")}
-              colorScheme="black"
+              colorScheme="teal"
+              mt="20px"
+            //   onClick={logout}
               variant="outline"
             >
-              Sign Up
+              Log Out
             </Button>
-          </Flex>
-        </PopoverHeader>
-        <PopoverBody p="0px">
-          <Flex flexDir="column">
-            <Box p="15px" className={NavStyle.greyHover}>
-              Whish List
-            </Box>
-            <Box p="15px" className={NavStyle.greyHover}>
-              Your Order
-            </Box>
-            <Box p="15px" className={NavStyle.greyHover}>
-              Your Refferal
-            </Box>
           </Flex>
         </PopoverBody>
       </PopoverContent>
@@ -80,4 +80,4 @@ function Acount() {
   );
 }
 
-export default Acount;
+export default UserAccount;

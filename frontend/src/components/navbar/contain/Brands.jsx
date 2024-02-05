@@ -32,7 +32,7 @@ function Brands() {
 
   const [brandkeys, setBrandkeys] = useState([]);
   const navigate = useNavigate();
-  console.log(brandnames);
+  // console.log(brandnames);
   const brands = {
     A: ["almay", "anna sui", "annabelle"],
     B: ["benefit", "boosh", "burt's bees", "butter london"],
@@ -74,7 +74,7 @@ function Brands() {
     let arr = [];
     for (let keys in brands) {
       arr.push(keys);
-      console.log(keys);
+      // console.log(keys);
     }
     setBrandkeys(arr);
   }
@@ -101,6 +101,7 @@ function Brands() {
             <Flex gap="1px">
               {brandkeys.map((e) => (
                 <Box
+                 key={e}
                   className={NavStyle.greyHover}
                   p="10px"
                   onMouseOver={() => {
@@ -119,7 +120,7 @@ function Brands() {
           <SimpleGrid mx="50px" columns={5}>
             {brandnames.map((e) => {
               return (
-                <Box className={NavStyle.greyHover}>
+                <Box key={e} className={NavStyle.greyHover}>
                   <Text onClick={toggleSearch}>{e}</Text>
                 </Box>
               );

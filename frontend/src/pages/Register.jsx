@@ -16,6 +16,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 // import jwt from "jsonwebtoken";
 //https://real-red-hen-hem.cyclic.app
@@ -23,16 +24,16 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
-  // console.log(user)
-  //https://real-red-hen-hem.cyclic.app
-  //   const redirectPath = location.state?.path || "/";
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const user = { email, password, name: username };
     console.log(user)
     try {
@@ -41,6 +42,22 @@ export default function Register() {
         user,
         { withCredentials: true }
       );
+      setLoading(false);
+      if(response.data=="User already exists"){
+         toast({
+           title: `User already exists, Please go to Log in`,
+           status: "warning",
+           isClosable: true,
+         });
+      }
+      if (response.data == "Check your email for otp") {
+        toast({
+          title: `Check your email for otp`,
+          status: "success",
+          isClosable: true,
+        });
+        navigate("/verification");
+      }
       console.log(response.data);
       // Optionally update user context or perform other actions upon successful registration
     } catch (error) {
@@ -48,6 +65,13 @@ export default function Register() {
       // Provide user-friendly feedback or handle errors as needed
     }
   };
+
+
+
+
+
+
+
 
   return (
     <Flex
@@ -97,6 +121,8 @@ export default function Register() {
                 _hover={{
                   bg: "cyan.500",
                 }}
+                isLoading={loading}
+                loadingText="Verifying..."
               >
                 SING UP
               </Button>

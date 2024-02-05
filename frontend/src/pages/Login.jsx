@@ -15,6 +15,7 @@ import {
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContext";
+import axios from "axios";
 
 // import jwt from "jsonwebtoken";
 export default function Login() {
@@ -24,18 +25,30 @@ export default function Login() {
   const navigate = useNavigate();
   const { user, setUser} = useContext(UserContext);
 
-  // console.log(user)
-
-
-//   const redirectPath = location.state?.path || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(email, password);
     user.email = email;
     user.password = password;
-    console.log(user)
+    // console.log(user);
+    logingin()
   };
+
+  const logingin = async () => {
+    axios.post("https://real-red-hen-hem.cyclic.app/user/login", user)
+    .then((res)=>{
+      // console.log(res);
+    user.status = true;
+    user.name = res.data.userDetail.name;
+      navigate("/")
+      console.log(res.data.userDetail)
+      console.log(user)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
 
   return (
     <Flex

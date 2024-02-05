@@ -20,8 +20,25 @@ import Blog from "./contain/Blog";
 import Navmenu from "./Navmenu";
 import Popsearch from "./Popsearch";
 // import { Link } from "react-router-dom";
+import { UserContext } from "../../Contexts/UserContext";
+import { useContext, useEffect, useState } from "react";
+import UserAccount from "./UserAccount";
+
 
 function Navbar() {
+
+  const { user, setUser } = useContext(UserContext);
+  const [isLogin, setIsLogin] = useState(false);
+ 
+  // useEffect(() => {
+  //   setIsLogin(user.status)
+  //   console.log(isLogin, "this is useeffect")
+  // },[user.status])
+
+
+// console.log(isLogin, "from nav")
+
+
   return (
     <Flex
       zIndex={"999"}
@@ -37,13 +54,13 @@ function Navbar() {
         alignItems="center"
         w={"80%"}
       >
-        <Flex w={"80%"} gap={"15px"} alignItems={"center"} m={3} >
-        <Navmenu />
-        <Popsearch />
+        <Flex w={"80%"} gap={"15px"} alignItems={"center"} m={3}>
+          <Navmenu />
+          <Popsearch />
         </Flex>
-        <Flex w={"80%"} justifyContent={"space-evenly"} >
-        <Acount />
-        <Cart />
+        <Flex w={"80%"} justifyContent={"space-evenly"}>
+          {isLogin ? <UserAccount /> : <Acount />}
+          <Cart />
         </Flex>
       </Flex>
 
@@ -74,11 +91,19 @@ function Navbar() {
             part of the LOOKFANTASTIC group
           </Text>
         </Flex>
-        <Box w={"40%"} display={{ lg: "flex", md: "none", sm: "none", base: "none" }} >
-        <Search />
+        <Box
+          w={"40%"}
+          display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
+        >
+          <Search />
         </Box>
-        <Flex w={"20%"} justifyContent={"space-evenly"} display={{ lg: "flex", md: "none", sm: "none", base: "none" }} >
-          <Acount />
+        <Flex
+          w={"20%"}
+          justifyContent={"space-evenly"}
+          display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
+        >
+           <Acount />
+
           <Cart />
         </Flex>
       </Box>
