@@ -7,17 +7,11 @@ import { Navigate } from "react-router-dom";
 
 
 function Cart({num}){
-  // const { user, setUser } = useContext(UserContext);
 
-   const [quantity, setQuantity] = useState(0);
-
-    // setQuantity(user.cart)
-
-    // useEffect(() => {
-    //   setQuantity(user.cart);
-    //   console.log("Cart",user.cart)
-    // },[user.Cart])
-    
+  useEffect(() => {
+    console.log(num)
+  })
+   
   
 
     return (
@@ -36,7 +30,7 @@ function Cart({num}){
               bg="black"
               borderRadius="50%"
             >
-              {quantity}
+              {num}
             </Text>
           </Box>
         </Box>

@@ -31,7 +31,7 @@ function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
-  // const [num, setNum] = useState(0);
+  const [num, setNum] = useState(0);
  
 
 
@@ -39,7 +39,6 @@ function Navbar() {
     navigate("/");
     // console.log("clicked")
   }
-  //  setNum(user.cart)
   
   function handleCartClick(e){
     e.preventDefault()
@@ -47,9 +46,10 @@ function Navbar() {
     // console.log("clickedd here")
   }
   
-  // useEffect(() => {
-  //   console.log("navbar", user)
-  // },[user.cart])
+  useEffect(() => {
+    setNum(user.cart)
+    console.log("navbar", user, num)
+  })
 
 
   return (
@@ -118,7 +118,7 @@ function Navbar() {
            <Acount />
            
            <Link onClick={handleCartClick} >
-          <Cart />
+          <Cart num={num} />
            </Link>
         </Flex>
       </Box>

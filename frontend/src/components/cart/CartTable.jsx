@@ -180,7 +180,7 @@ const [data, setData] = useState([]);
                     <Box
                       className={CartStyle.blackHover}
                       onClick={() => {
-                        toggleRemoveFromCart(e._id );
+                        toggleRemoveFromCart(e.id );
                       }}
                       w="16px"
                       borderRadius="50%"
