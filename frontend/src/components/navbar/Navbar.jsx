@@ -23,20 +23,33 @@ import Popsearch from "./Popsearch";
 import { UserContext } from "../../Contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import UserAccount from "./UserAccount";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 function Navbar() {
 
   const { user, setUser } = useContext(UserContext);
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+  // const [num, setNum] = useState(0);
  
+
+
+  function handleClickLogo(){
+    navigate("/");
+    // console.log("clicked")
+  }
+  //  setNum(user.cart)
+  
+  function handleCartClick(e){
+    e.preventDefault()
+    navigate("/CartPage");
+    // console.log("clickedd here")
+  }
+  
   // useEffect(() => {
-  //   setIsLogin(user.status)
-  //   console.log(isLogin, "this is useeffect")
-  // },[user.status])
-
-
-// console.log(isLogin, "from nav")
+  //   console.log("navbar", user)
+  // },[user.cart])
 
 
   return (
@@ -59,7 +72,7 @@ function Navbar() {
           <Popsearch />
         </Flex>
         <Flex w={"80%"} justifyContent={"space-evenly"}>
-          {isLogin ? <UserAccount /> : <Acount />}
+          <Acount />
           <Cart />
         </Flex>
       </Flex>
@@ -73,7 +86,7 @@ function Navbar() {
       >
         <Flex
           cursor={"pointer"}
-          onClick={() => (window.location.href = "/")}
+          onClick={handleClickLogo}
           display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
           justifyContent={"center"}
           flexDir={"column"}
@@ -103,8 +116,10 @@ function Navbar() {
           display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
         >
            <Acount />
-
+           
+           <Link onClick={handleCartClick} >
           <Cart />
+           </Link>
         </Flex>
       </Box>
       <Flex

@@ -8,9 +8,11 @@ export  function UserProvider({ children }) {
         name: "",
         password: "",
         email: "",
+        id:"",
+        cart:0,
     })
 
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState("all")
     
 
     return (

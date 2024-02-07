@@ -22,32 +22,61 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import axios from "axios";
 import { UserContext } from "../Contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 // import { SearchContext } from "../Utilis/Context/SearchContext";
 // "https://makeup-api.herokuapp.com/api/v1/products.json"
 //https://skin-care-hub.onrender.com/product?l=all&q=
 const ProductPage = () => {
-//   const { search, togglesearch } = useContext(SearchContext);
   const { user, setUser, search, setSearch } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const [noofElements, setnoofElements] = useState(10);
   const [sortBy, setsortBy] = useState(null);
   const [load, setLoad] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchPosts = async () => {
-      // console.log(query)'
       setLoad(true);
 
       const res = await axios.get(
-        `https://real-red-hen-hem.cyclic.app/product/search/${search}`
+        `http://localhost:5000/product/search/${search}/${sortBy}`,
+        { withCredentials: true }
       );
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setPosts(res.data.data);
+      setnoofElements(10);
 
     
       setLoad(false);
     };
     fetchPosts();
   }, [sortBy,search]);
+
+  function handleQuickBuy(id) {
+    if(!user.status){
+      return navigate("/login")
+    }
+    // navigate(`/CartPage/${id}`);
+    console.log(id)
+     id.user_id = user.id;
+     axios
+       .post(`http://localhost:5000/product/cart`, id, {
+         withCredentials: true,
+       })
+       .then((res) => {
+         // console.log(res.data.data)
+         // setCartId(res.data.data)
+         console.log(res);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+
+    
+
+
+
+
+  }
 
   const slice = posts.slice(0, noofElements);
   const loadMore = () => {
@@ -64,8 +93,7 @@ const ProductPage = () => {
   }
   return (
     <>
-    
-      <Box  w="95%" m={5} justifyContent="space-evenly">
+      <Box w="95%" m={5} justifyContent="space-evenly">
         <Box>
           <Heading>The Holiday Countdown is On!</Heading>
           <Text margin="auto" textAlign="left" fontWeight="100">
@@ -79,10 +107,10 @@ const ProductPage = () => {
 
       <SimpleGrid gap={10} gridTemplateColumns={"1fr 1fr"} p={2}>
         <HStack display="grid" gridTemplateColumns={"0.5fr 1.5fr"} p={2}>
-          <Heading fontWeight="200">Brands</Heading>
+          <Heading fontWeight="200">Category</Heading>
           <Select
             placeholder="Select option"
-            onChange={(e) => setSearch({ q: e.target.value })}
+            onChange={(e) => setSearch(e.target.value)}
           >
             <option value="eyeliner">Eyeliner</option>
             <option value="foundation">Foundation</option>
@@ -90,8 +118,8 @@ const ProductPage = () => {
             <option value="lipstick">Lipstick</option>
             <option value="mascara">Mascara</option>
             <option value="bronzer">Bronzer</option>
-            <option value="nail_polish">Nail Polish</option>
-            <option value="lip_liner">Lip Liner</option>
+            <option value="nail polish">Nail Polish</option>
+            <option value="lip liner">Lip Liner</option>
           </Select>
         </HStack>
         {/* <RadioGroup onChange={setProductype} value={productype}>
@@ -103,8 +131,8 @@ const ProductPage = () => {
         <HStack>
           <RadioGroup onChange={setsortBy} value={sortBy}>
             <Stack direction="row">
-              <Radio value="asc">Price Low To High</Radio>
-              <Radio value="des">Price High To Low</Radio>
+              <Radio value="asc" onClick={(e) => setsortBy("asc")}  >Price Low To High</Radio>
+              <Radio value="desc" onClick={(e) => setsortBy("desc")}>Price High To Low</Radio>
             </Stack>
           </RadioGroup>
         </HStack>
@@ -144,7 +172,7 @@ const ProductPage = () => {
                   ) : (
                     ""
                   )}
-                  <Box>
+                  <Box cursor={"pointer"} onClick={() => navigate(`/product/${el._id}`)} >
                     {" "}
                     <Image
                       boxSize="270"
@@ -172,7 +200,7 @@ const ProductPage = () => {
                     {el.name}
                   </Heading>
                   <Text fontSize="lg" fontWeight="600" textAlign="center" p={1}>
-                    ₹ {el.price}
+                     $ {el.price}
                   </Text>{" "}
                   <HStack
                     p={1}
@@ -195,7 +223,9 @@ const ProductPage = () => {
                       fontSize={"1.2em"}
                     >
                       <chakra.a
-                        href={`/product/${el._id}`}
+                        onClick={(e) => {
+                          handleQuickBuy(el)
+                        }}
                         display={"flex"}
                         margin="auto"
                       >

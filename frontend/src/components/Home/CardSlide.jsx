@@ -212,7 +212,7 @@ export default function App() {
       >
         {data.map((el) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={el.id} >
               {/* <Link> */}
               <Box p={10}>
                 <Image mb={10} src={el.image_link} />

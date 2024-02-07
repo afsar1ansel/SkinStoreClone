@@ -30,25 +30,25 @@ export default function Register() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
+  //https://real-red-hen-hem.cyclic.app/user/register
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     const user = { email, password, name: username };
-    console.log(user)
+    console.log(user);
     try {
-      const response = await axios.post(
-        "https://real-red-hen-hem.cyclic.app/user/register",
-        user,
-        { withCredentials: true }
-      );
+      const response = await axios.post("http://localhost:5000/user/register", user, {
+        withCredentials: true,
+      });
       setLoading(false);
-      if(response.data=="User already exists"){
-         toast({
-           title: `User already exists, Please go to Log in`,
-           status: "warning",
-           isClosable: true,
-         });
+      if (response.data == "User already exists") {
+        toast({
+          title: `User already exists, Please go to Log in`,
+          status: "warning",
+          isClosable: true,
+        });
       }
       if (response.data == "Check your email for otp") {
         toast({
@@ -65,13 +65,6 @@ export default function Register() {
       // Provide user-friendly feedback or handle errors as needed
     }
   };
-
-
-
-
-
-
-
 
   return (
     <Flex

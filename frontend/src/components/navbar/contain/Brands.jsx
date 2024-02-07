@@ -79,7 +79,10 @@ function Brands() {
     setBrandkeys(arr);
   }
   function toggleSearch(e) {
-    toggleUrlQuery({ brand: e.target.innerHTML });
+    e.preventDefault();
+
+    console.log(brandnames[0]);
+    setSearch(brandnames[0]);
     navigate("/productpage");
   }
   useEffect(() => {

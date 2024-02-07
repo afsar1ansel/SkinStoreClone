@@ -1,11 +1,28 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
   import { BsMinecartLoaded } from "react-icons/bs";
+import { UserContext } from "../../Contexts/UserContext";
+import { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 
-function Cart(){
+
+function Cart({num}){
+  // const { user, setUser } = useContext(UserContext);
+
+   const [quantity, setQuantity] = useState(0);
+
+    // setQuantity(user.cart)
+
+    // useEffect(() => {
+    //   setQuantity(user.cart);
+    //   console.log("Cart",user.cart)
+    // },[user.Cart])
+    
+  
 
     return (
-      <Flex alignItems="center">
+
+      <Flex alignItems="center"  >
         <Box display="flex" alignItems="center" h="30px">
           <BsMinecartLoaded size="20px" />
           <Box h="100%">
@@ -19,7 +36,7 @@ function Cart(){
               bg="black"
               borderRadius="50%"
             >
-              {/* {cartData ? cartData.length : 0} */}0
+              {quantity}
             </Text>
           </Box>
         </Box>

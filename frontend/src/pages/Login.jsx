@@ -22,9 +22,12 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const navigate = useNavigate();
-  const { user, setUser} = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
+  //https://real-red-hen-hem.cyclic.app/user/login
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,23 +35,29 @@ export default function Login() {
     user.email = email;
     user.password = password;
     // console.log(user);
-    logingin()
+    logingin();
   };
 
   const logingin = async () => {
-    axios.post("https://real-red-hen-hem.cyclic.app/user/login", user)
-    .then((res)=>{
-      // console.log(res);
-    user.status = true;
-    user.name = res.data.userDetail.name;
-      navigate("/")
-      console.log(res.data.userDetail)
-      console.log(user)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
+    setLoading(true);
+    axios
+      .post("http://localhost:5000/user/login", user, { withCredentials: true })
+      .then((res) => {
+        // console.log(res);
+        user.status = true;
+        user.name = res.data.userDetail.name;
+        user.id = res.data.userDetail._id;
+        localStorage.setItem("userStatus", JSON.stringify(user.status));
+        navigate("/");
+        setLoading(false);
+        console.log(res.data.userDetail);
+        console.log(user);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
+  };
 
   return (
     <Flex
@@ -100,6 +109,8 @@ export default function Login() {
                 _hover={{
                   bg: "cyan.500",
                 }}
+                isLoading={loading}
+                loadingText="Loging in..."
               >
                 LOGIN
               </Button>

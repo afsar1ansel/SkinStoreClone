@@ -43,12 +43,10 @@ const Productdetails = () => {
   const x6 = useColorModeValue("white", "gray.900");
   const fetchData = () => {
     console.log(params);
-    axios
-      .get(`https://skin-care-hub.onrender.com/product/${params.id}`)
-      .then((res) => {
-        console.log(res);
-        setItem(res.data);
-      });
+    axios.get(`http://localhost:5000/product/id/${params.id}`).then((res) => {
+      console.log(res.data.data);
+      setItem(res.data.data);
+    });
   };
   useEffect(() => {
     console.log(params);
@@ -68,7 +66,7 @@ const Productdetails = () => {
             <Flex>
               <Image
                 rounded={"md"}
-                alt={item.image_link}
+                alt={item.image_link1}
                 src={item.image_link}
                 objectFit={"contain"}
                 align={"center"}
@@ -101,7 +99,7 @@ const Productdetails = () => {
                     fontWeight={"300"}
                     textTransform={"capitalize"}
                   >
-                    {item.category}
+                    {item.product_type}
                   </Text>
                   <Text fontSize={"lg"}>{item.description}</Text>
                 </VStack>
