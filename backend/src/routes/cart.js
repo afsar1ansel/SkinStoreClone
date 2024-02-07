@@ -1,0 +1,43 @@
+const express = require("express");
+const cartList = require("../models/cartModel");
+const { auth } = require("../middleware/auth.middleware");
+const cartRouter = express.Router();
+
+cartRouter.get("/usercart/:id",  async (req, res) => {
+  console.log(req.params.id);
+  // console.log(req.body.user_id);
+  try {
+    const cart = await cartList.find({user_id:req.params.id});
+    res.send(cart);
+  }catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
+
+cartRouter.post("/cart", async (req, res) => {
+
+  console.log(req.body)
+  try {
+    const cart = new cartList(req.body);
+    await cart.save();
+    res.send(cart);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
+cartRouter.delete("/cart/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const cart = await cartList.findByIdAndDelete(id);
+    res.send(cart);
+
+  } catch (error) {
+    res.status(500).send({ error: "Internal Server Error" }); 
+    console.log(error);
+  }
+  
+})
+
+module.exports = cartRouter;

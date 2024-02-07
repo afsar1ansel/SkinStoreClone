@@ -5,13 +5,29 @@ const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
   try {
     const data = await product.find({});
-    console.log(data);
+    // console.log(data);
     res.send({ data: data });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Internal Server Error" });
   }
 });
+
+productRouter.get("/id/:_id", async (req, res) => {
+  const { _id } = req.params;
+  // console.log(req.params);
+  try {
+    if(!_id){
+      return res.status(400).send({error:"Invalid Id"});
+    }
+    const data = await product.findById(_id);
+    res.send({ data: data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal Server Error" });
+    
+  }
+})
 
 productRouter.get("/search/:name/:sort?", async (req, res) => {
   try {
@@ -26,7 +42,7 @@ productRouter.get("/search/:name/:sort?", async (req, res) => {
     }
 
     const searchData = await product.find({ name: regex }).sort(sortOptions);
-    console.log(searchData);
+    // console.log(searchData);
 
     res.send({ data: searchData });
   } catch (error) {

@@ -18,7 +18,7 @@ registerRouter.post("/register", async (req, res) => {
   }
 
   userDetail = { email, password, name };
-  otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
+  otp = Math.ceil(Math.random() * 1000000);
   console.log(otp);
 
   const transporter = nodemailer.createTransport({
@@ -47,7 +47,7 @@ registerRouter.post("/register", async (req, res) => {
 registerRouter.post("/verify", async (req, res) => {
   const { userOtp } = req.body;
   console.log(userOtp, otp);
-  if (userOtp === otp) {
+  if (userOtp == otp) {
     try {
       bcrypt.hash(userDetail.password, 5, async (err, hash) => {
         if (err) {

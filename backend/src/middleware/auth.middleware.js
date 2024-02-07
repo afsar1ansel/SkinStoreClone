@@ -3,9 +3,8 @@ require("dotenv").config();
 
 const auth = async (req, res, next) => {
   const { authToken, refreshToken } = req.cookies;
-
-  console.log(authToken, refreshToken);
-
+  // console.log("auth",req.cookies);
+  
   try {
     if (authToken) {
       const decodedAuthToken = await jwt.verify(
@@ -13,7 +12,8 @@ const auth = async (req, res, next) => {
         process.env.AUTH_TOKEN
       );
       if (decodedAuthToken) {
-        console.log(decodedAuthToken);
+        console.log("decodedAuthToken" + decodedAuthToken.userID);
+        req.body.user_id = decodedAuthToken.userID;
         return next();
       }
     }
@@ -33,6 +33,8 @@ const auth = async (req, res, next) => {
         res.cookie("authToken", newAuthToken, {
           httpOnly: true,
           maxAge: 1000 * 60 * 60,
+          sameSite: "none",
+          // secure:true,
         });
 
         console.log("New authToken created:", newAuthToken);

@@ -4,6 +4,7 @@ const User = require("../models/userModle");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {auth} = require("../middleware/auth.middleware");
+require("dotenv").config();
 
 // login
 loginRouter.post("/login", async (req, res) => {
@@ -36,13 +37,13 @@ loginRouter.post("/login", async (req, res) => {
             httpOnly: true,
             maxAge: 1000 * 60 * 60,
             sameSite: "none",
-            secure: true,
+            // secure: true,
           })
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24,
             sameSite: "none",
-            secure: true,
+            // secure: true,
           })
 
           res.send({mgs:"Login Successful", userDetail:user, authToken:authToken,refreshToken:refreshToken});
