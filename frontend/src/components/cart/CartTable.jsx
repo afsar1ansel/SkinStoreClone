@@ -31,12 +31,13 @@ function CartTable() {
 const [data, setData] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const [load, setLoad] = useState(true);
+  const [cartTotal,setcartTotal] = useState(0) 
 
   if(!user.status){
     return <Navigate to="/login" />
   }
 
-  var cartTotal = 0;
+  // var cartTotal = 0;
   const toast = useToast();
 
   
@@ -56,6 +57,8 @@ const [data, setData] = useState([]);
       .catch((err) => {
         console.log(err);
       });
+
+      // console.log(data)
     
   }, [user.id, load]);
   
@@ -78,6 +81,12 @@ const [data, setData] = useState([]);
      console.log(data);
     //  toggleRemoveFromCart();
         user.cart = data.length;
+
+        const total = data.reduce((acc, item) => {
+          return acc + item.price;
+        },0)
+        setcartTotal(total)
+        user.totalPrice = total;
 
    }, [data]);
 
@@ -117,7 +126,7 @@ const [data, setData] = useState([]);
             {data.map((e) => {
             //   cartTotal += +e.productId.price * e.quantity;
               return (
-                <Tr>
+                <Tr key={e._id} >
                   <Td>
                     <Box
                       display="flex"

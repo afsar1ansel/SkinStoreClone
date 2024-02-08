@@ -8,6 +8,7 @@ import Verification from './Verification'
 import CartPage from './CartPage'
 import ForgotPass from './ForgotPass'
 import ForgotVerification from './ForgotVerification'
+import CreditCardForm from './CreditCardForm'
 
 
 export default function AllRouter() {
@@ -24,6 +25,7 @@ export default function AllRouter() {
         <Route path="/CartPage/" element={<CartPage />} />
         <Route path="/ForgotPass" element={<ForgotPass />} />
         <Route path="/ForgotVerification" element={<ForgotVerification />} />
+        <Route path='/CreditCardForm' element={<CreditCardForm />} />
       </Routes>
     );
 }

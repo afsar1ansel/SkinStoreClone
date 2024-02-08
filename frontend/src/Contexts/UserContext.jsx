@@ -10,6 +10,7 @@ export  function UserProvider({ children }) {
         email: "",
         id:"",
         cart:0,
+        totalPrice:0
     })
 
     const [search, setSearch] = useState("all")

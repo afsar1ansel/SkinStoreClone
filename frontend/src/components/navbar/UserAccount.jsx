@@ -70,6 +70,9 @@ function UserAccount() {
               mt="20px"
             //   onClick={logout}
               variant="outline"
+              onClick={() => {
+                location.reload();
+              }}
             >
               Log Out
             </Button>
