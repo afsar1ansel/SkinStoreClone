@@ -54,6 +54,7 @@ export default function Login() {
         console.log(user);
       })
       .catch((err) => {
+        alert("Invalid Credentials");
         setLoading(false);
         console.log(err);
       });
@@ -98,6 +99,9 @@ export default function Login() {
               >
                 <Link to="/register">
                   <Text color={"blue.400"}> New Customer?</Text>
+                </Link>
+                <Link to="/ForgotPass" >
+                  <Text color={"blue.400"}>Forgot Password?</Text>
                 </Link>
               </Stack>
               <Button

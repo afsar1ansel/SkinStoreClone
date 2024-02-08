@@ -1,12 +1,22 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 
-
-export default function Verification() {
+export default function ForgotVerification() {
   const [otp, setOtp] = useState("");
+  const [pass, setPass] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
@@ -14,9 +24,9 @@ export default function Verification() {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-     console.log(otp);
+    console.log(otp);
     axios
-      .post("https://real-red-hen-hem.cyclic.app/user/verify", { userOtp: otp })
+      .patch("http://localhost:5000/user/reset/", { userotp: otp, password: pass })
       .then((res) => {
         console.log(res.data);
         if (res.error) {
@@ -71,6 +81,12 @@ export default function Verification() {
               <Input type="text" onChange={(e) => setOtp(e.target.value)} />
             </FormControl>
             <Stack spacing={10}>
+
+                <FormControl id="otp">
+              <FormLabel>Enter Your New Password</FormLabel>
+              <Input type="text" onChange={(e) => setPass(e.target.value)} />
+            </FormControl>
+            <Stack spacing={10}></Stack>
               <Button
                 onClick={handleLogin}
                 fontWeight="500"

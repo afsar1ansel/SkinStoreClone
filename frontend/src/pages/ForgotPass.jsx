@@ -1,11 +1,20 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 
-
-export default function Verification() {
+export default function ForgotPass() {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -14,17 +23,17 @@ export default function Verification() {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-     console.log(otp);
+    console.log(otp);
     axios
-      .post("https://real-red-hen-hem.cyclic.app/user/verify", { userOtp: otp })
+      .post("http://localhost:5000/user/forgot", { email: otp })
       .then((res) => {
         console.log(res.data);
         if (res.error) {
           throw new Error(res.message);
         }
         toast({
-          title: "Account created.",
-          description: "We've created your account for you.",
+          title: "OTP sent.",
+          description: "We've sent OTP to your email..",
           status: "success",
           duration: 9000,
           isClosable: true,
@@ -67,7 +76,7 @@ export default function Verification() {
         >
           <Stack spacing={4}>
             <FormControl id="otp">
-              <FormLabel>Enter Your OTP Sent to Your EMAIL :-</FormLabel>
+              <FormLabel>Please Enter Your Email id :-</FormLabel>
               <Input type="text" onChange={(e) => setOtp(e.target.value)} />
             </FormControl>
             <Stack spacing={10}>
@@ -83,7 +92,7 @@ export default function Verification() {
                 isLoading={loading}
                 loadingText="Verifying..."
               >
-                Verify OTP
+                Enter
               </Button>
             </Stack>
           </Stack>
