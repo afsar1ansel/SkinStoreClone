@@ -5,7 +5,7 @@ const cartRouter = express.Router();
 
 cartRouter.get("/usercart/:id",  async (req, res) => {
   console.log(req.params.id);
-  // console.log(req.body.user_id);
+  // console.log(req.body);
   try {
     const cart = await cartList.find({user_id:req.params.id});
     res.send(cart);
@@ -18,6 +18,7 @@ cartRouter.get("/usercart/:id",  async (req, res) => {
 cartRouter.post("/cart", async (req, res) => {
 
   console.log(req.body)
+  req.body.id = Math.floor(Math.random() * 1000000000);
   try {
     const cart = new cartList(req.body);
     await cart.save();
@@ -30,7 +31,7 @@ cartRouter.post("/cart", async (req, res) => {
 cartRouter.delete("/cart/delete/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const cart = await cartList.findByIdAndDelete(id);
+    const cart = await cartList.deleteOne({id:id});
     res.send(cart);
 
   } catch (error) {

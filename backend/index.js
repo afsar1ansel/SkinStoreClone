@@ -6,12 +6,13 @@ const cookieParser = require('cookie-parser')
 const product = require('./src/models/product')
 const cors = require('cors')
 
-app.use(cors({ origin: ["http://localhost:5174","*","http://localhost:5000"], credentials: true,   }));
+app.use(cors({ origin: ["http://localhost:5173","*","http://localhost:5000"], credentials: true,   }));
 app.use(cookieParser())
 
 app.use(express.json())
 app.use("/user", require('./src/routes/userRegister'))
 app.use("/user", require('./src/routes/login'))
+app.use("/user", require('./src/routes/forgotPass'))
 app.use("/product", require('./src/routes/getproduct'))
 app.use("/product", require('./src/routes/cart'))
 
