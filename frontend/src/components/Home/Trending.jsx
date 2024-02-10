@@ -8,7 +8,7 @@ const Trending = () => {
   return (
     <Box
       alignSelf="normal"
-      display="flex"
+      display={{ lg: "flex",}}
       flexDirection="column"
       alignItems="center"
     >

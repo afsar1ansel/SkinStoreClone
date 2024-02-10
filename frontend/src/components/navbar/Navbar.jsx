@@ -48,7 +48,7 @@ function Navbar() {
   
   useEffect(() => {
     setNum(user.cart)
-    console.log("navbar", user, num)
+    // console.log("navbar", user, num)
   })
 
 

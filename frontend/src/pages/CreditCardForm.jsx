@@ -106,9 +106,9 @@ function CreditCardForm() {
         // border={"1px solid black"}
         boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
         p={4}
-        display={"flex"}
+        display={{}}
         justifyContent={"center"}
-        w={"40%"}
+        w={{ base: "100%", md: "50%", lg: "50%", }}
       >
 
         <FormControl onSubmit={handleSubmit}>
