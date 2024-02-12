@@ -6,7 +6,17 @@ const cookieParser = require('cookie-parser')
 const product = require('./src/models/product')
 const cors = require('cors')
 
-app.use(cors({ origin: ["http://localhost:5173","*","http://localhost:5000"], credentials: true,   }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "*",
+      "http://localhost:5000",
+      "https://skin-store-clone-h1p8.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(cookieParser())
 
 app.use(express.json())

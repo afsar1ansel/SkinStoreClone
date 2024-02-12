@@ -52,4 +52,25 @@ productRouter.get("/search/:name/:sort?", async (req, res) => {
 });
 
 
+
+// productRouter.post("/delete/:id", async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     if (!id) {
+//       return res.status(400).send({ error: "Invalid Id" });
+//     }
+//     const deletedProduct = await product.findByIdAndDelete(id);
+//     if (!deletedProduct) {
+//       return res.status(404).send({ error: "Product not found" });
+//     }
+//     res.send({ message: "Product deleted successfully", data: deletedProduct });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: "Internal Server Error" });
+//   }
+// });
+
+
+
+
 module.exports = productRouter;

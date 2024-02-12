@@ -46,7 +46,7 @@ registerRouter.post("/register", async (req, res) => {
 
 registerRouter.post("/verify", async (req, res) => {
   const { userOtp } = req.body;
-  console.log(userOtp, otp);
+  console.log(userOtp,"and", otp);
   if (userOtp == otp) {
     try {
       bcrypt.hash(userDetail.password, 5, async (err, hash) => {

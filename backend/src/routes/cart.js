@@ -41,4 +41,23 @@ cartRouter.delete("/cart/delete/:id", async (req, res) => {
   
 })
 
+
+//deleting
+
+
+cartRouter.delete("/usercart/:id", async (req,res)=>{
+   const { id } = req.params;
+   try {
+     const deletedCart = await cartList.deleteMany({ user_id: id });
+     res.send({
+       message: "All carts for the user deleted successfully",
+       data: deletedCart,
+     });
+   } catch (error) {
+     console.error(error);
+     res.status(500).send({ error: "Internal Server Error" });
+   }
+
+});
+
 module.exports = cartRouter;
