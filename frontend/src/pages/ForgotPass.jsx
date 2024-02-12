@@ -25,7 +25,7 @@ export default function ForgotPass() {
     setLoading(true);
     console.log(otp);
     axios
-      .post("http://localhost:5000/user/forgot", { email: otp })
+      .post("https://skinstore.onrender.com/user/forgot", { email: otp })
       .then((res) => {
         console.log(res.data);
         if (res.error) {
@@ -38,7 +38,7 @@ export default function ForgotPass() {
           duration: 9000,
           isClosable: true,
         });
-        navigate("/login");
+        navigate("/ForgotVerification");
       })
       .catch((err) => {
         console.log(err);

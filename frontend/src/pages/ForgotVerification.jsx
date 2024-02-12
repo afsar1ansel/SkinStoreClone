@@ -26,7 +26,10 @@ export default function ForgotVerification() {
     setLoading(true);
     console.log(otp);
     axios
-      .patch("http://localhost:5000/user/reset/", { userotp: otp, password: pass })
+      .patch("https://skinstore.onrender.com/user/reset/", {
+        userotp: otp,
+        password: pass,
+      })
       .then((res) => {
         console.log(res.data);
         if (res.error) {
