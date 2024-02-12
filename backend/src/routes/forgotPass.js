@@ -49,7 +49,7 @@ forgotRouter.post("/forgot", async (req, res) => {
 
 forgotRouter.patch("/reset", async (req, res) => {
   const { userotp, password } = req.body; 
-//   console.log(otp, userotp);
+  console.log(otp, userotp);
 
   try {
     if (otp == userotp) {
