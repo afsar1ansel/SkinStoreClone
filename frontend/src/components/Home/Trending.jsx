@@ -17,7 +17,7 @@ const Trending = () => {
       </Text>
       <SimpleGrid
         rowGap="20px"
-        columns={{ lg: 6, md: 3, sm: 2, base: 2 }}
+        columns={{ lg: 6, md: 3, sm: 1, base: 1 }}
         spacing={0}
         w="100%"
         m="auto"
@@ -27,7 +27,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/57/original-Page-001%5B1%5D-054257.png"
               />
             </Link>
@@ -37,7 +37,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/01/original-Page-002%5B1%5D-054301.png"
               />
             </Link>
@@ -47,7 +47,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/10/original-Page-003%5B1%5D-054310.png"
               />
             </Link>
@@ -57,7 +57,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/19/original-Page-004%5B1%5D-054319.png"
               />
             </Link>
@@ -67,7 +67,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/28/original-Page-005%5B1%5D-054328.png"
               />
             </Link>
@@ -77,7 +77,7 @@ const Trending = () => {
           <Box>
             <Link to="/">
               <Image
-                boxSize="12vw"
+                boxSize={{ lg: "12vw", base: "50vw" }}
                 src="https://static.thcdn.com/images/small/webp/widgets/121-us/36/original-Page-006%5B1%5D-054336.png"
               />
             </Link>
