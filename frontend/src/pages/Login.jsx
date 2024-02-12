@@ -41,7 +41,9 @@ export default function Login() {
   const logingin = async () => {
     setLoading(true);
     axios
-      .post("http://localhost:5000/user/login", user, { withCredentials: true })
+      .post("https://skinstore.onrender.com/user/login", user, {
+        withCredentials: true,
+      })
       .then((res) => {
         // console.log(res);
         user.status = true;

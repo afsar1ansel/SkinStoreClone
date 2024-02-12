@@ -16,7 +16,7 @@ export default function Verification() {
     setLoading(true);
      console.log(otp);
     axios
-      .post("https://real-red-hen-hem.cyclic.app/user/verify", { userOtp: otp })
+      .post("https://skinstore.onrender.com/user/verify", { userOtp: otp })
       .then((res) => {
         console.log(res.data);
         if (res.error) {

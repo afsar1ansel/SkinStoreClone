@@ -45,14 +45,13 @@ const [data, setData] = useState([]);
   useEffect(() => {
 
     axios
-      .get(`http://localhost:5000/product/usercart/${user.id}`, {
+      .get(`https://skinstore.onrender.com/product/usercart/${user.id}`, {
         withCredentials: true,
       })
       .then((res) => {
         console.log(res.data);
         setData(res.data);
-        console.log(user)
-        
+        console.log(user);
       })
       .catch((err) => {
         console.log(err);
@@ -64,17 +63,17 @@ const [data, setData] = useState([]);
   
   function toggleRemoveFromCart(id) {
     console.log(id)
-    axios.delete(`http://localhost:5000/product/cart/delete/${id}`, {
-      withCredentials: true,
-
-    })
+    axios
+      .delete(`https://skinstore.onrender.com/product/cart/delete/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
-        console.log(res.data)
-        setLoad(!load)
+        console.log(res.data);
+        setLoad(!load);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
    useEffect(() => {
@@ -207,7 +206,7 @@ const [data, setData] = useState([]);
       <Box textAlign="right" w="100%">
         <Text>
           Cart Subtotal:{" "}
-          <span style={{ fontWeight: "bold" }}>₹{cartTotal}</span>
+          <span style={{ fontWeight: "bold" }}>${cartTotal}</span>
         </Text>
       </Box>
       <Divider />

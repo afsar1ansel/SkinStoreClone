@@ -39,9 +39,13 @@ export default function Register() {
     const user = { email, password, name: username };
     console.log(user);
     try {
-      const response = await axios.post("http://localhost:5000/user/register", user, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "https://skinstore.onrender.com/user/register",
+        user,
+        {
+          withCredentials: true,
+        }
+      );
       setLoading(false);
       if (response.data == "User already exists") {
         toast({
