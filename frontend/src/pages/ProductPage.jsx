@@ -38,7 +38,7 @@ const ProductPage = () => {
       setLoad(true);
 
       const res = await axios.get(
-        `http://localhost:5000/product/search/${search}/${sortBy}`,
+        `https://skinstore.onrender.com/product/search/${search}/${sortBy}`,
         { withCredentials: true }
       );
       // console.log(res.data.data);
@@ -59,7 +59,7 @@ const ProductPage = () => {
     console.log(id)
      id.user_id = user.id;
      axios
-       .post(`http://localhost:5000/product/cart`, id, {
+       .post(`https://skinstore.onrender.com/product/cart`, id, {
          withCredentials: true,
        })
        .then((res) => {

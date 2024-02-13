@@ -43,10 +43,12 @@ const Productdetails = () => {
   const x6 = useColorModeValue("white", "gray.900");
   const fetchData = () => {
     console.log(params);
-    axios.get(`http://localhost:5000/product/id/${params.id}`).then((res) => {
-      console.log(res.data.data);
-      setItem(res.data.data);
-    });
+    axios
+      .get(`https://skinstore.onrender.com/product/id/${params.id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setItem(res.data.data);
+      });
   };
   useEffect(() => {
     console.log(params);
