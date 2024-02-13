@@ -16,7 +16,7 @@ import { Box } from "@chakra-ui/react";
 
 export default function App() {
   return (
-    <Box h="70vh" w="80%">
+    <Box h="70vh" w="92%">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

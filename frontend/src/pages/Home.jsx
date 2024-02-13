@@ -9,7 +9,7 @@ export default function Home() {
     <Flex justifyContent={"center"} flexDir={"column"} alignItems={"center"}>
       <Box
         bg={"black"}
-        w={"80%"}
+        w={"92%"}
         h={"40px"}
         color={"white"}
         textAlign={"center"}
