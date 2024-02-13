@@ -3,7 +3,7 @@ const cartList = require("../models/cartModel");
 const { auth } = require("../middleware/auth.middleware");
 const cartRouter = express.Router();
 
-cartRouter.get("/usercart/:id",  async (req, res) => {
+cartRouter.get("/usercart/:id", auth, async (req, res) => {
   console.log(req.params.id);
   // console.log(req.body);
   try {
